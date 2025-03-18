@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Table Viewer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Data Table Viewer</h1>
+            <div class="controls">
+                <button id="toggleTheme">Toggle Dark Mode</button>
+                <button id="resetColumns" class="reset-btn">Reset</button>
+            </div>
+        </header>
+
+        <div class="table-container">
+            <table id="dataTable">
+                <thead>
+                    <tr id="tableHeader">
+                        <!-- Column headers will be added here dynamically -->
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Table rows will be added here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <button id="nextColumn" class="action-btn">Show Next Column</button>
+        </div>
+
+        <div class="column-status">
+            <h2>Visible columns: <span id="columnCounter">0/0</span></h2>
+            <div id="columnPills" class="column-pills">
+                <!-- Column pills will be added here dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
