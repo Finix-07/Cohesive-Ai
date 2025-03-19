@@ -1,5 +1,24 @@
-[
-    {"Name": "Alice", "Age": 25, "City": "New York", "Score": 90},
-    {"Name": "Bob", "Age": 30, "City": "Los Angeles", "Score": 85},
-    {"Name": "Charlie", "Age": 35, "City": "Chicago", "Score": 88}
-  ]
+{
+    "Company": [
+        {
+            "type": "name",
+            "value": "Cohesive AI"
+        },
+        {
+            "Name": "h1",
+            "Description": "p"
+        }
+    ]
+}{
+    "Company": [
+        {
+            "type": "url",
+            "value": "https://summerofcode.withgoogle.com/"
+        },
+        {
+            "summary": {
+                "content": "Google Summer of Code is a global program that brings new contributors into open source software development. It provides an opportunity for individuals to work on projects under the guidance of mentors over a 12-week period. The program has mentored over 21,000 new contributors since 2005 and has over 1,000 participating organizations. The website offers resources and information for both potential contributors and organizations looking to participate in the program."
+            }
+        }
+    ]
+}

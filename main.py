@@ -1,7 +1,7 @@
 # import the libraries
 
 from modules.content_fetch import scrape_content
-
+from modules.info_fetch import fetch_info
 
 # main working code according to the flowchart
 user = 'Finix'
@@ -39,8 +39,5 @@ print("------\t\t------")
 for col, fmt in columns.items():
     print(f"{col}\t\t{fmt}")
 
-# get html content of the company
-summary = scrape_content(company_info, "200 words summary of the information in page", "llama3.2")
-
-print(summary)
-
+# scrape content from the website url for each column with a structured prompt given by the user
+fetch_info(company_info, columns)
