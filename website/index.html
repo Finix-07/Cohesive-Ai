@@ -10,6 +10,7 @@
 
 <body>
     <div class="container">
+        <!-- Header Section -->
         <header>
             <h1>Data Table Viewer</h1>
             <div class="controls">
@@ -18,13 +19,13 @@
             </div>
         </header>
 
-        <!-- Company Information -->
+        <!-- Company Information Section -->
         <div id="companyInfo" class="company-info">
-            <h2>Company: <span id="companyName"></span></h2>
-            <h3>URL: <a id="companyLink" href="#" target="_blank"></a></h3>
+            <h2>Company: <span id="companyName">Loading...</span></h2>
+            <h3>URL: <a id="companyLink" href="#" target="_blank">Visit Site</a></h3>
         </div>
 
-        <!-- Data Table -->
+        <!-- Data Table Section -->
         <div class="table-container">
             <table id="dataTable">
                 <thead>
@@ -34,7 +35,7 @@
             </table>
         </div>
 
-        <!-- Column Status -->
+        <!-- Column Status Section -->
         <div class="column-status">
             <h2>Visible Columns: <span id="columnCounter">0/0</span></h2>
             <div id="columnPills" class="column-pills"></div>
