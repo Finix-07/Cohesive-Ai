@@ -170,9 +170,9 @@ Launches a simple web server to display the data.
 
 ---
 ## Webpage display
-![inputs][inputs.jpg]
-![lightmode][light.png]
-![darkmode][dark.png]
+![inputs](inputs.jpg)
+![lightmode](light.png)
+![darkmode](dark.png)
 
 
 ## 🎯 Future Improvements (TODO)
