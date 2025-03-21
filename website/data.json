@@ -1,5 +1,28 @@
-[
-    {"Name": "Alice", "Age": 25, "City": "New York", "Score": 90},
-    {"Name": "Bob", "Age": 30, "City": "Los Angeles", "Score": 85},
-    {"Name": "Charlie", "Age": 35, "City": "Chicago", "Score": 88}
-  ]
+{
+    "company": {
+        "name": "Glitchy",
+        "url": "https://www.glitchy.com/"
+    },
+    "columns": [
+        "Summary",
+        "Objective",
+        "Customers"
+    ],
+    "data": {
+        "Summary": {
+            "content": {
+                "content": "Glitchy is a digital marketing education platform that aims to help users harness the power of affiliate marketing for free. It provides resources, guides, and mentorship to its 40,000+ community members who have generated millions in revenue since 2022. The platform offers a supportive environment where users can learn from each other and achieve life-changing wealth."
+            }
+        },
+        "Objective": {
+            "content": {
+                "content": "The objective of the company Glitchy is to surpass traditional business schools and become the largest community-driven digital marketing platform, dedicated to creating, educating, and preserving wealth and opportunities for entrepreneurs around the world."
+            }
+        },
+        "Customers": {
+            "content": {
+                "content": "The website states that it has 40,000+ users who have already generated millions with Affiliate Marketing."
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "company": {
+        "name": "Cohesive AI",
+        "url": "https://www.cohesive.ai"
+    },
+    "columns": [
+        "Name",
+        "Description"
+    ],
+    "data": {
+        "Name": {
+            "content": "Cohesive AI"
+        },
+        "Description": {
+            "content": "An advanced AI platform for content automation."
+        }
+    }
+}

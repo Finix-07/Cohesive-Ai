@@ -1,131 +1,113 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // DOM elements
-    const tableHeader = document.getElementById('tableHeader');
-    const tableBody = document.getElementById('tableBody');
-    const nextColumnBtn = document.getElementById('nextColumn');
-    const resetColumnsBtn = document.getElementById('resetColumns');
-    const toggleThemeBtn = document.getElementById('toggleTheme');
-    const columnCounter = document.getElementById('columnCounter');
-    const columnPills = document.getElementById('columnPills');
-    
-    // State variables
-    let tableData = [];
-    let allColumns = [];
-    let visibleColumns = [];
-    
-    // Load data from JSON file
-    async function loadData() {
-        try {
-            const response = await fetch('data.json');
-            tableData = await response.json();
-            
-            if (tableData.length > 0) {
-                allColumns = Object.keys(tableData[0]);
-                updateColumnPills();
-                updateColumnCounter();
-            }
-        } catch (error) {
-            console.error('Error loading data:', error);
-            
-            // Fallback to sample data if fetch fails
-            tableData = [
-                {"Name": "Alice", "Age": 25, "City": "New York", "Score": 90},
-                {"Name": "Bob", "Age": 30, "City": "Los Angeles", "Score": 85},
-                {"Name": "Charlie", "Age": 35, "City": "Chicago", "Score": 88}
-            ];
-            
-            allColumns = Object.keys(tableData[0]);
-            updateColumnPills();
-            updateColumnCounter();
-        }
-    }
-    
-    // Add the next column
-    function addNextColumn() {
-        if (visibleColumns.length < allColumns.length) {
-            const nextColumnIndex = visibleColumns.length;
-            const nextColumn = allColumns[nextColumnIndex];
-            visibleColumns.push(nextColumn);
-            
-            // Add header cell
-            const headerCell = document.createElement('th');
-            headerCell.textContent = nextColumn;
-            tableHeader.appendChild(headerCell);
-            
-            // If this is the first column, create rows for all data
-            if (visibleColumns.length === 1) {
-                tableData.forEach((row, index) => {
-                    const tableRow = document.createElement('tr');
-                    tableRow.id = `row-${index}`;
-                    const cell = document.createElement('td');
-                    cell.textContent = row[nextColumn];
-                    tableRow.appendChild(cell);
-                    tableBody.appendChild(tableRow);
-                });
-            } 
-            // Otherwise, add cells to existing rows
-            else {
-                tableData.forEach((row, index) => {
-                    const tableRow = document.getElementById(`row-${index}`);
-                    const cell = document.createElement('td');
-                    cell.textContent = row[nextColumn];
-                    tableRow.appendChild(cell);
-                });
-            }
-            
-            updateColumnPills();
-            updateColumnCounter();
-            
-            // Hide the next button if all columns are shown
-            if (visibleColumns.length === allColumns.length) {
-                nextColumnBtn.classList.add('hidden');
-            }
-        }
-    }
-    
-    // Reset all columns
-    function resetColumns() {
-        visibleColumns = [];
-        tableHeader.innerHTML = '';
-        tableBody.innerHTML = '';
-        updateColumnPills();
-        updateColumnCounter();
-        nextColumnBtn.classList.remove('hidden');
-    }
-    
-    // Toggle dark/light theme
-    function toggleTheme() {
-        document.body.classList.toggle('dark-mode');
-    }
-    
-    // Update column pills display
-    function updateColumnPills() {
-        columnPills.innerHTML = '';
-        allColumns.forEach(column => {
-            const pill = document.createElement('span');
-            pill.textContent = column;
-            pill.classList.add('column-pill');
-            
-            if (visibleColumns.includes(column)) {
-                pill.classList.add('active');
-            } else {
-                pill.classList.add('inactive');
-            }
-            
-            columnPills.appendChild(pill);
-        });
-    }
-    
-    // Update column counter
-    function updateColumnCounter() {
-        columnCounter.textContent = `${visibleColumns.length}/${allColumns.length}`;
-    }
-    
-    // Event listeners
-    nextColumnBtn.addEventListener('click', addNextColumn);
-    resetColumnsBtn.addEventListener('click', resetColumns);
-    toggleThemeBtn.addEventListener('click', toggleTheme);
-    
-    // Initialize the app
-    loadData();
+// Wait for DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+    fetchData(); // Fetch and display data
+    setupEventListeners(); // Setup dark mode and reset
 });
+
+// Fetch and load JSON data
+async function fetchData() {
+    try {
+        const response = await fetch("data.json");
+        const jsonData = await response.json();
+
+        // Support both single and multiple entries
+        if (Array.isArray(jsonData)) {
+            jsonData.forEach(displayTable);
+        } else {
+            displayTable(jsonData);
+        }
+    } catch (error) {
+        console.error("Error loading JSON data:", error);
+    }
+}
+
+// Display table from JSON
+function displayTable(data) {
+    const companyName = document.getElementById("companyName");
+    const companyLink = document.getElementById("companyLink");
+    const tableHeader = document.getElementById("tableHeader");
+    const tableBody = document.getElementById("tableBody");
+    const columnPills = document.getElementById("columnPills");
+    const columnCounter = document.getElementById("columnCounter");
+
+    // Set company name and URL
+    companyName.textContent = data.company.name || "Unknown";
+    companyLink.textContent = data.company.url || "No URL";
+    companyLink.href = data.company.url || "#";
+
+    // Clear previous content
+    tableHeader.innerHTML = "";
+    tableBody.innerHTML = "";
+    columnPills.innerHTML = "";
+
+    // Create table headers and column pills
+    data.columns.forEach((column, index) => {
+        // Add table headers
+        const th = document.createElement("th");
+        th.textContent = column;
+        th.dataset.index = index; // For toggle reference
+        tableHeader.appendChild(th);
+
+        // Add column pills for visibility toggle
+        const pill = document.createElement("span");
+        pill.className = "column-pill active";
+        pill.textContent = column;
+        pill.dataset.index = index; // Associate with the column
+        pill.addEventListener("click", toggleColumn);
+        columnPills.appendChild(pill);
+    });
+
+    // Create a single row from data
+    const row = document.createElement("tr");
+    data.columns.forEach(column => {
+        const td = document.createElement("td");
+        // Handle nested content structure properly
+        td.textContent = data.data[column]?.content?.content || "N/A";
+        row.appendChild(td);
+    });
+    tableBody.appendChild(row);
+
+    // Update visible column count
+    updateColumnCounter();
+}
+
+// Toggle visibility of a column
+function toggleColumn(event) {
+    const index = event.target.dataset.index;
+    const header = document.querySelector(`#tableHeader th:nth-child(${+index + 1})`);
+    const cells = document.querySelectorAll(`#tableBody td:nth-child(${+index + 1})`);
+
+    // Toggle visibility
+    const isVisible = header.style.display !== "none";
+    header.style.display = isVisible ? "none" : "table-cell";
+    cells.forEach(cell => {
+        cell.style.display = isVisible ? "none" : "table-cell";
+    });
+
+    // Toggle active class for pill
+    event.target.classList.toggle("active");
+
+    // Update the visible column counter
+    updateColumnCounter();
+}
+
+// Update the visible column counter
+function updateColumnCounter() {
+    const activePills = document.querySelectorAll(".column-pill.active").length;
+    const totalPills = document.querySelectorAll(".column-pill").length;
+    document.getElementById("columnCounter").textContent = `${activePills}/${totalPills}`;
+}
+
+// Setup dark mode toggle and reset functionality
+function setupEventListeners() {
+    // Dark mode toggle
+    document.getElementById("toggleTheme").addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
+
+    // Reset button (reloads page)
+    document.getElementById("resetTable").addEventListener("click", () => {
+        location.reload();
+    });
+}
+

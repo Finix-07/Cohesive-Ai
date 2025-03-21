@@ -1,46 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Table Viewer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>Data Table Viewer</h1>
             <div class="controls">
                 <button id="toggleTheme">Toggle Dark Mode</button>
-                <button id="resetColumns" class="reset-btn">Reset</button>
+                <button id="resetTable" class="reset-btn">Reset</button>
             </div>
         </header>
 
+        <!-- Company Information -->
+        <div id="companyInfo" class="company-info">
+            <h2>Company: <span id="companyName"></span></h2>
+            <h3>URL: <a id="companyLink" href="#" target="_blank"></a></h3>
+        </div>
+
+        <!-- Data Table -->
         <div class="table-container">
             <table id="dataTable">
                 <thead>
-                    <tr id="tableHeader">
-                        <!-- Column headers will be added here dynamically -->
-                    </tr>
+                    <tr id="tableHeader"></tr>
                 </thead>
-                <tbody id="tableBody">
-                    <!-- Table rows will be added here dynamically -->
-                </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </div>
 
-        <div class="actions">
-            <button id="nextColumn" class="action-btn">Show Next Column</button>
-        </div>
-
+        <!-- Column Status -->
         <div class="column-status">
-            <h2>Visible columns: <span id="columnCounter">0/0</span></h2>
-            <div id="columnPills" class="column-pills">
-                <!-- Column pills will be added here dynamically -->
-            </div>
+            <h2>Visible Columns: <span id="columnCounter">0/0</span></h2>
+            <div id="columnPills" class="column-pills"></div>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
+
 </html>
