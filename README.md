@@ -110,6 +110,45 @@ It is recommended to use a virtual environment to manage dependencies.
     ```
 
 ---
+## 🦙Setting up Ollama and run llama 3.2
+
+**Get up and running with large language models (LLMs) easily.**
+
+---
+
+### 📥 Installation
+
+#### macOS
+[Download for macOS](https://ollama.com/download/Ollama-darwin.zip)
+
+#### Windows
+[Download for Windows](https://ollama.com/download/OllamaSetup.exe)
+
+#### Linux
+```bash
+curl -fsSL https://ollama.com/install.sh | sh
+```
+For manual installation, follow the [manual install instructions](https://github.com/ollama/ollama/blob/main/docs/linux.md).
+
+---
+
+#### 🐳 Docker Support
+
+The official **Ollama** Docker image is available on Docker Hub:
+
+```bash
+docker pull ollama/ollama
+```
+
+#### 🚀 Quickstart
+
+To run and chat with **Llama 3.2**, use the following command:
+
+```bash
+ollama run llama3.2
+```
+
+---
 
 ✅ **Now you are ready to install project dependencies and run the application!**
 
